@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔓 নার্সারীর কোর্স</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 { color: #333; margin-bottom: 20px; font-size: 28px; }
+        .subtitle { color: #666; margin-bottom: 30px; }
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 20px 0;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(102,126,234,0.3);
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(102,126,234,0.4); }
+        .status { padding: 15px; border-radius: 10px; margin: 20px 0; display: none; }
+        .loading { background: #ffcc00; color: #333; }
+        .success { background: #4CAF50; color: white; }
+        .error { background: #f44336; color: white; }
+        .info-box { background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 30px; text-align: left; }
+        .step { display: flex; align-items: center; margin: 10px 0; padding: 10px; background: #e9ecef; border-radius: 8px; }
+        .step-number { background: #667eea; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-weight: bold; }
+        @media (max-width: 600px) { .container { padding: 20px; } h1 { font-size: 24px; } .btn { padding: 15px; font-size: 16px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 নার্সারীর কোর্স</h1>
+        <p class="subtitle">নার্সারীর তিনটি বিষয়ের ক্লাস এখানে</p>
+        
+        <div id="status" class="status"></div>
+        
+        <button class="btn" onclick="startAutoLogin()" id="loginBtn">
+            <span id="btnText">🔓 কোর্স দেখতে এখানে ক্লিক করুন</span>
+            <span id="loadingText" style="display:none;">⏳ ভিডিও চালু হচ্ছে...</span>
+        </button>
+        
+        <div class="info-box">
+            <h3>📋 এখানে কি কি ক্লাস থাকবে?</h3>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>বাংলা (৪টি ভিডিও)</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>ইংরেজি (১২টি ভিডিও) </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>গণিত (৫টি ভিডিও) </div>
+            </div>
+            <div class="step">
+                <div class="step-number"></div>
+                <div>নার্সারীতে মোট ২১টি ভিডিও</div>
+            </div>
+
+
+<div class="step">
+                <div class="step-number"></div>
+                <div><marquee style="color: red;">আপনার লগইন করতে অসুবিধা হলে-</marquee>  <br>
+            ✅ User Name: mochna11<br>
+            ✅ Password: 543792</div>
+            </div>
+
+
+        </div>
+        
+     
+
+    <script>
+        // ⚠️ এডিট করবেন: আপনার লগইন তথ্য
+        const LOGIN_INFO = {
+            username: 'mochna11',      // 🔴 আপনার ইউজারনেম এখানে দিন
+            password: '543792',        // 🔴 আপনার পাসওয়ার্ড এখানে দিন
+            videoUrl: 'https://course.itminanpublications.com/courses/class-nursery-video-course/lessons/nursari-bangla-01/?page_tab=overview'
+        };
+        
+        function updateStatus(message, type = 'loading') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = 'status ' + type;
+            status.style.display = 'block';
+        }
+        
+        function startAutoLogin() {
+            const btn = document.getElementById('loginBtn');
+            const btnText = document.getElementById('btnText');
+            const loadingText = document.getElementById('loadingText');
+            
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            loadingText.style.display = 'inline';
+            
+            updateStatus('🔐 লগইন প্রক্রিয়া শুরু...', 'loading');
+            
+            // Step 1: লগইন পেজে যান
+            setTimeout(() => {
+                updateStatus('📡 লগইন পেজ লোড হচ্ছে...', 'loading');
+                
+                const loginWindow = window.open(
+                    'https://course.itminanpublications.com/wp-login.php?redirect_to=' + 
+                    encodeURIComponent(LOGIN_INFO.videoUrl),
+                    '_blank'
+                );
+                
+                // Step 2: অটোফিল লগইন তথ্য
+                setTimeout(() => {
+                    updateStatus('🔄 লগইন তথ্য পূরণ করা হচ্ছে...', 'loading');
+                    
+                    if(loginWindow) {
+                        try {
+                            // লগইন স্ক্রিপ্ট তৈরি
+                            const fillScript = `
+                                setTimeout(() => {
+                                    // সব ইনপুট ফিল্ড খুঁজুন
+                                    const inputs = document.querySelectorAll('input');
+                                    let formFound = false;
+                                    
+                                    inputs.forEach(input => {
+                                        // ইউজারনেম ফিল্ড
+                                        if(input.type === 'text' || input.type === 'email' || 
+                                           input.name?.includes('user') || input.name?.includes('login') ||
+                                           input.placeholder?.toLowerCase().includes('user') ||
+                                           input.placeholder?.toLowerCase().includes('email')) {
+                                            input.value = '${LOGIN_INFO.username}';
+                                            input.dispatchEvent(new Event('input', {bubbles: true}));
+                                            formFound = true;
+                                        }
+                                        
+                                        // পাসওয়ার্ড ফিল্ড
+                                        if(input.type === 'password' || input.name?.includes('pass') ||
+                                           input.placeholder?.toLowerCase().includes('password')) {
+                                            input.value = '${LOGIN_INFO.password}';
+                                            input.dispatchEvent(new Event('input', {bubbles: true}));
+                                            formFound = true;
+                                        }
+                                    });
+                                    
+                                    if(formFound) {
+                                        // 2 সেকেন্ড পর সাবমিট
+                                        setTimeout(() => {
+                                            const forms = document.querySelectorAll('form');
+                                            if(forms.length > 0) {
+                                                forms[0].submit();
+                                            }
+                                        }, 2000);
+                                    }
+                                }, 2000);
+                            `;
+                            
+                            // স্ক্রিপ্ট এক্সিকিউট করার চেষ্টা
+                            loginWindow.postMessage({action: 'fillForm', script: fillScript}, '*');
+                            updateStatus('✅ লগইন তথ্য পাঠানো হয়েছে!', 'success');
+                            
+                        } catch(e) {
+                            updateStatus('⚠️ অটোফিল ব্যর্থ। ম্যানুয়াল তথ্য দেখানো হচ্ছে...', 'error');
+                            showManualInstructions();
+                        }
+                    } else {
+                        showManualInstructions();
+                    }
+                }, 3000);
+                
+                // Step 3: ভিডিও চেক
+                setTimeout(() => {
+                    updateStatus('🎬 ভিডিও পেজ চেক করা হচ্ছে...', 'loading');
+                    window.open(LOGIN_INFO.videoUrl, '_blank');
+                    resetButton();
+                }, 8000);
+                
+            }, 1000);
+        }
+        
+        function showManualInstructions() {
+            const manualInfo = `
+                লগইন তথ্য:
+                
+                ইউজারনেম: ${LOGIN_INFO.username}
+                পাসওয়ার্ড: ${LOGIN_INFO.password}
+                
+                ভিডিও লিঙ্ক:
+                ${LOGIN_INFO.videoUrl}
+                
+                এই তথ্য দিয়ে লগইন করুন।
+            `;
+            alert(manualInfo);
+            resetButton();
+        }
+        
+        function resetButton() {
+            const btn = document.getElementById('loginBtn');
+            btn.disabled = false;
+            document.getElementById('btnText').style.display = 'inline';
+            document.getElementById('loadingText').style.display = 'none';
+        }
+        
+        // মোবাইল ডিটেক্ট
+        if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            document.querySelector('.subtitle').innerHTML += '<br><small>📱 আপনার মোবাইল ডিভাইস</small>';
+        }
+    </script>
+</body>
+</html>
